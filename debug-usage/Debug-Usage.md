@@ -114,6 +114,8 @@ public void test(){
     */
     Nag.user(msg);
 
+    
+
     /**
     * 保存信息到文件中
     */
@@ -194,6 +196,54 @@ public enum MsgType {
 
 ```
 
+```
+
+//
+//  NOALogService.h
+//  NOALogSDK
+//
+//  Created by Scott Wang on 1/9/18.
+//  Copyright © 2018 NOA Labs. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NOALogService : NSObject
+
+/**
+ * 初始化 NOALogService
+ */
++(void)configure;
+
+/**
+ * 设置本地数据库中最大的缓存天数,默认缓存两天数据
+ * {暂未实现}
+ */
++(void)setCacheDate;
+
+/**
+ * 设置本地文件日志最大缓存天数,默认缓存两天文件信息
+ * {暂未实现}
+ */
++(void)setCacheFileDate;
+
+/**
+ * 设置单条日志信息,缓存的长度。
+ * 到达缓存长度之后写入本地文件存储中, 主要为了避免频繁的操作本地文件
+ * {暂未实现}
+ */
++(void)setMsgCacheLength;
+
+/**
+ * 测试方法
+ */
++(void)test;
+
+@end
+
+
+```
+
 2. 保存各种类型数据的用法   
 <font face="微软雅黑" color=#DC143C size=5>备注：</font>建议在上层应用中重新建立一个类封装各种数据保存的用法, 1. 为了自己更清晰和明白对应方法的含义, 2. 当程序比较成熟,并且极少出现bug,为了减少App的大小,我们需要移除SDK，避免为了到处删除SDK的引用此时可以使用一个类封装，当出现这种情况，仅仅需要删除封装类中的方法
 ```
@@ -201,7 +251,7 @@ public enum MsgType {
     [Nag event: @"保存信息到事件中"];
     [Nag feedback:@"用户反馈信息"];
     [Nag file:@"保存本地的日志信息到文件中."];
-
+    [Nag other:@"对数据划分不明确，或者暂无接口的可以保存在other中"];
     
     /*
      typedef NS_ENUM(NSInteger,NLRecordsMsgType){
@@ -222,6 +272,75 @@ public enum MsgType {
     [Nag userId:@"123456" user:user];
 }
 ```
+
+```
+
+//
+//  Nag.h
+//  NOALogSDK
+//
+//  Created by Scott Wang on 1/8/18.
+//  Copyright © 2018 NOA Labs. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+typedef NS_ENUM(NSInteger,NLRecordsMsgType){
+    NLRecordsMsgTypeLogin = 0,
+    NLRecordsMsgTypeConfig,
+    NLRecordsMsgTypePermissions,
+    NLRecordsMsgTypeConnect,
+    NLRecordsMsgTypeMessage,
+    NLRecordsMsgTypeOther,
+};
+
+@interface Nag : NSObject
+
+
+/**
+ * 保存用户信息
+ */
++(void)userId:(nullable NSString *)userId user:(nullable NSMutableDictionary *)user;
+
+/**
+ * 对数据划分不明确，或者暂无接口的可以保存在other中
+ */
++(void)other:(nullable NSString *)msg;
+
+/**
+ * 保存日志到文件中
+ */
++(void)file:(nullable NSString *)log;
+
+/**
+ * 保存事件信息
+ * 主要是界面切换, 用户点击事件
+ */
++(void)event:(nullable NSString *)msg;
+
+/**
+ * 保存用户Feedback信息
+ * 当用户提交Feedback时,同时将本地的信息一同提交到Firebase后台
+ */
++(void)feedback:(nullable NSString *)msg;
+
+/**
+ * 保存数据到 records1 节点
+ *
+ */
++(void)r1:(NLRecordsMsgType)type key:(nullable NSString *)key msg:(nullable NSString *)msg;
+
+/**
+ * 预留方法, 保存数据到 records2 节点
+ */
++(void)r2;
+
+@end
+
+
+
+```
+
 ## 5 How to compile SDK source code and Precautions
 ### 5.1 Android
 1. Android Version的SDk 支持19(4.4)及以上版本
