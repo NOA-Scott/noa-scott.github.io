@@ -5,7 +5,7 @@
 Welcome to NOA-Labs IOS Remote Log SDK, The following will be the usage of SDK.   
 > [1 Sign up for a Firebase account](#1-sign-up-for-a-firebase-account)
 >
-> [2 Create a Project in Firebase](#2-create-a-project-in-firebase)
+> [2 Create a Project in Firebase](#2-create-a-project-in-firebase)
 >
 > [3 Add App to Firebase's Project](#3-add-app-to-firebases-project)
 >
@@ -13,7 +13,7 @@ Welcome to NOA-Labs IOS Remote Log SDK, The following will be the usage of SDK.
 >
 > > [3.2 IOS](#32-add-ios-app)
 >
-> [4 How to use SDK in the App](#4-how-to-use-sdk-in-the-app)
+> [4 How to use SDK in the App](#4-how-to-use-sdk-in-the-app)
 >
 > > [4.1 Android](#41-android)
 >
@@ -34,7 +34,7 @@ Welcome to NOA-Labs IOS Remote Log SDK, The following will be the usage of SDK.
 如果你已经存在[Firebase](firebase.google.com)账号, 请忽略并查看第二步操作   
 如果你不存在[Firebase](firebase.google.com)帐号,请前往该网址进行注册[https://firebase.google.com/](https://firebase.google.com/)
    
-## 2 Create a Project in Firebase   
+## 2 Create a Project in Firebase   
 为需要记录的App或者其他类型的Project创建一个Project。   
 ![10](./img/10.png)
 ## 3 Add App to Firebase's Project
